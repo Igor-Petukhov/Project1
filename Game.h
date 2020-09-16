@@ -1,3 +1,10 @@
+/*#include "Game.h"
+
+	srand(time(NULL));
+	Generate_Pole();
+	tmp_time = time(0);
+	StartGame();*/
+
 #pragma once
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
