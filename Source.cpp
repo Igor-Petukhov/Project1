@@ -10,17 +10,15 @@
 using namespace std;
 
 #include "Users.h"
-#include "Menu.h"
-
+#include "Singleton_Menu.h"
 #include "test.h"
 
 int main()
 {
 	Base_User a;
 	a.Start();
-	Menu menu(a);
-	
-
+	Singleton_Menu* singleton_menu = Singleton_Menu::getInstance();
+	singleton_menu->Show_Menu(a);
 
 }
 

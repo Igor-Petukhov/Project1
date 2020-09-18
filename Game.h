@@ -1,10 +1,3 @@
-/*#include "Game.h"
-
-	srand(time(NULL));
-	Generate_Pole();
-	tmp_time = time(0);
-	StartGame();*/
-
 #pragma once
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -109,7 +102,8 @@ void Show()
 	if ((x == y5_1) || (x == y5_2))
 	{
 		cout << endl << "-----------GAME OVER----------" << endl;
-		exit(777);
+		Sleep(3000);
+		exit(3);
 	}
 }
 

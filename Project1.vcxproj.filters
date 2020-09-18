@@ -20,21 +20,30 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="test.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Users.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
+    <ClInclude Include="Singleton_Menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Category.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_delete.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Users.txt">
+    <Text Include="User\Users.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="User\1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

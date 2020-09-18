@@ -1,5 +1,0 @@
-0_surname 2
-1_name 22
-2_fathersname 222
-3_address 2222
-4_telephone 22222
