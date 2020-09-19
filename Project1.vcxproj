@@ -140,14 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Category.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Singleton_Menu.h" />
-    <ClInclude Include="Test.h" />
-    <ClInclude Include="test_delete.h" />
     <ClInclude Include="Users.h" />
+    <ClInclude Include="UserTakesTest.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="User\1.txt" />

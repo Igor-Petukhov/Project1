@@ -1,0 +1,60 @@
+surname:
+2
+name:
+2
+fathersname:
+2
+address:
+2
+telephone number:
+2
+test name:
+slozenije
+questions all:
+5
+correct answers:
+0
+percentage:
+0.000000
+mark:
+0.000000
+test name:
+slozenije
+questions all:
+5
+correct answers:
+0
+percentage:
+0.000000
+mark:
+0.000000
+test name:
+slozenije
+questions all:
+5
+correct answers:
+1
+percentage:
+20.000000
+mark:
+2.400000
+test name:
+live
+questions all:
+3
+correct answers:
+0
+percentage:
+0.000000
+mark:
+0.000000
+test name:
+c++
+questions all:
+3
+correct answers:
+3
+percentage:
+100.000000
+mark:
+12.000000

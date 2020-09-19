@@ -6,12 +6,14 @@
 #include <conio.h>
 #include <windows.h>
 #include <direct.h>
+#include <vector>
 
 using namespace std;
 
 #include "Users.h"
 #include "Singleton_Menu.h"
-#include "test.h"
+#include "Category.h"
+#include "UserTakesTest.h"
 
 int main()
 {

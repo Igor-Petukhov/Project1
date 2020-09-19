@@ -1,0 +1,10 @@
+Is it alive or dead? stone is alive (y/n)
+n
+horse is alive (y/n)
+y
+elephant is alive (y/n)
+y
+table is alive (y/n)
+n
+car is alive (y/n)
+n

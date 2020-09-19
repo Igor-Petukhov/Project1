@@ -3,7 +3,6 @@
 class Base_User
 {
 private:
-	map<string, string> id_card; //тут данные конкретного пользователя
 	string login, password;
 	string admin_login; //первый логин и есть логин админа
 	int user_type = 0; //1-admin, 2-user
@@ -11,6 +10,7 @@ private:
 	char x = '0';
 
 public:
+	vector <pair<string, string>> id_card; //тут данные конкретного пользователя
 	map<string, long long> user_map; //сюда считываются логины и хеши паролей из файла
 	
 	string GetAdmLogin()
@@ -77,9 +77,11 @@ public:
 			ofstream out4("User\\Users.txt");
 			if (out4.is_open())
 			{
+				out4 << admin_login << char(9) << user_map[admin_login] << endl;
 				for (auto it = user_map.begin(); it != user_map.end(); it++)
 				{
-					out4 << it->first << char(9) << it->second << endl;
+					if (admin_login != it->first)
+						out4 << it->first << char(9) << it->second << endl;
 				}
 			}
 			out4.close();
@@ -142,17 +144,25 @@ public:
 			out.close();
 
 			//заполняем данные пользователя
+			string tmp_str;
+
+			cin.ignore();
 			id_card.clear();
 			cout << "\nPlease, enter surname: ";
-			cin >> id_card["0_surname"];
+			getline(cin, tmp_str);
+			id_card.push_back(make_pair("surname:", tmp_str));
 			cout << "Please, enter name: ";
-			cin >> id_card["1_name"];
+			getline(cin, tmp_str);
+			id_card.push_back(make_pair("name:", tmp_str));
 			cout << "Please, enter fathersname: ";
-			cin >> id_card["2_fathersname"];
+			getline(cin, tmp_str);
+			id_card.push_back(make_pair("fathersname:", tmp_str));
 			cout << "Please, enter address: ";
-			cin >> id_card["3_address"];
+			getline(cin, tmp_str);
+			id_card.push_back(make_pair("address:", tmp_str));
 			cout << "Please, enter telephone number: ";
-			cin >> id_card["4_telephone"];
+			getline(cin, tmp_str);
+			id_card.push_back(make_pair("telephone number:", tmp_str));
 
 			//Сохраняем данные пользователя в новый файл
 			ofstream out2("User\\" + login + ".txt");
@@ -160,7 +170,7 @@ public:
 			{
 				for (auto it = id_card.begin(); it != id_card.end(); it++)
 				{
-					out2 << it->first << char(9) << it->second << endl;
+					out2 << it->first << endl << it->second << endl;
 				}
 			}
 			out2.close();
@@ -275,10 +285,10 @@ public:
 			if (in5.is_open())
 			{
 				string tmp_str_1, tmp_str_2;
-				while (in5 >> tmp_str_1)
+				while (getline(in5, tmp_str_1))
 				{
-					in5 >> tmp_str_2;
-					id_card[tmp_str_1] = tmp_str_2;
+					getline(in5, tmp_str_2);
+					id_card.push_back(make_pair(tmp_str_1, tmp_str_2));
 				}
 			}
 			in5.close();
@@ -295,6 +305,7 @@ public:
 	void SetUserInfo(string login)
 	{
 		id_card.clear();
+		cin.ignore();
 		ofstream out5("User\\" + login + ".txt");
 		if (out5.is_open())
 		{
@@ -302,13 +313,13 @@ public:
 			string tmp_str_1, tmp_str_2;
 			while (true)
 			{
-				cin >> tmp_str_1;
+				getline(cin, tmp_str_1);
 				if (tmp_str_1 == "exit")
 					break;
-				cin >> tmp_str_2;
+				getline(cin, tmp_str_2);
 				if (tmp_str_2 == "exit")
 					break;
-				id_card[tmp_str_1] = tmp_str_2;
+				id_card.push_back(make_pair(tmp_str_1, tmp_str_2));
 			}
 			out5.close();
 		}
@@ -323,7 +334,7 @@ public:
 			{
 				for (auto it = id_card.begin(); it != id_card.end(); it++)
 				{
-					out7 << it->first << char(9) << it->second << endl;
+					out7 << it->first << endl << it->second << endl;
 				}
 			}
 			out7.close();
@@ -334,9 +345,6 @@ public:
 			return 0;
 		}
 	}
-
-
-
 
 };
 

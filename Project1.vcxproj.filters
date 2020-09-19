@@ -18,6 +18,9 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Users.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Users.h">
@@ -32,10 +35,7 @@
     <ClInclude Include="Category.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="test_delete.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Test.h">
+    <ClInclude Include="UserTakesTest.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

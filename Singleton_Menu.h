@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "Users.h"
 #include "Game.h"
-#include "Test.h"
 #include "Users.h"
+#include "Category.h"
+#include "UserTakesTest.h"
 
 class Singleton_Menu
 {
@@ -13,6 +14,7 @@ private:
 public:
 	static Singleton_Menu* getInstance();
 
+	string tmp_str;
 	string tmp_login;
 	string new_admin_password;
 
@@ -48,9 +50,9 @@ public:
 				cout << "3 - Delete user\n";
 				cout << "4 - Make changes in user\n";
 				cout << "5 - See stats\n";//todo
-				cout << "6 - Add CATEGORY for tests\n";//todo
-				cout << "7 - Add test\n";//todo
-				cout << "8 - Add questions with answers in test\n";//todo
+				cout << "6 - Add CATEGORY for tests\n";
+				cout << "7 - Add test\n";
+				cout << "8 - Add questions with answers in test\n";
 				cout << "9 - Export/import of tests\n";//todo
 				cout << "10 - Play game \"SPACE Uber\"\n";
 				cout << "33 - EXIT\n";
@@ -150,16 +152,74 @@ public:
 
 					break;
 				case 6: //Add CATEGORY for tests
-
+				{
+					cout << "New category name: ";
+					cin >> tmp_str;
+					Category* categor = new Test();
+					if (categor->AddCategory(tmp_str))
+						cout << "\nSUCCESS\n";
+					else
+						cout << "\nTry another category name\n";
+					Sleep(2000);
 					break;
+				}
 				case 7: //Add test
-
+				{
+					Category* categor = new Test();
+					cout << "Choose category\n"; //выбираем в какую категорию добавить тест
+					categor->ShowCategoriesVector();
+					cin.clear();
+					cin >> choise;
+					if ((choise >= categor->GetLenghtCategoriesVector()) || (choise < 0))
+					{
+						cout << "\nTry another choise\n";
+						Sleep(2000);
+					}
+					else
+					{
+						cout << "New test name: "; //просим имя нового теста и добавляем его
+						cin.clear();
+						cin >> tmp_str;
+						if (categor->AddTest(tmp_str, choise))
+							cout << "\nSUCCESS\n";
+						else
+							cout << "\nTry another test name\n";
+						Sleep(2000);
+					}
 					break;
+				}
 				case 8: //Add questions with answers in test
-
+				{
+					Category* categor = new Test();
+					cout << "Choose category\n"; //тест выберем пройдя по иерархии от категории к конкретному тесту
+					categor->ShowCategoriesVector(); //сначала выбираем категорию, далее будет выбор теста
+					cin.clear();
+					cin >> choise; //некоторое время хранит индекс категории
+					if ((choise >= categor->GetLenghtCategoriesVector()) || (choise < 0))
+					{
+						cout << "\nTry another choise\n";
+						Sleep(2000);
+					}
+					else
+					{
+						cout << "Choose test\n"; //выбор теста
+						categor->ShowTests(choise); //показываем на экран какие есть тесты в выбранной категории
+						cin.clear();
+						int tmp;
+						cin >> tmp; //индекс теста
+						if ((tmp >= categor->GetLenghtTestsVector(choise)) || (tmp < 0))
+						{
+							cout << "\nTry another choise\n";
+							Sleep(2000);
+						}
+						else
+						{
+							categor->AddQuestionWithAnswer(tmp, choise);
+						}
+					}
 					break;
+				}
 				case 9: //Export/import of tests
-
 					break;
 				case 10: //Play game \"SPACE Uber\"
 					srand(time(NULL));
@@ -182,19 +242,35 @@ public:
 				/*¦ После входа гость имеет возможность просмотреть
 					свои предыдущие результаты тестирования, сдать
 					новое тестирование.*/
-				cout << "0 - Take a new test\n";//todo
-				cout << "1 - Show my statistics\n";//todo
-				cout << "33 - EXIT\n";//todo
+				cout << "0 - Take a new test\n";
+				cout << "1 - Show my statistics\n";
+				cout << "33 - EXIT\n";
 
 				cin.clear();
 				cin >> choise;
 				switch (choise)
 				{
-				case 0:
-					
+				case 0: //Take a new test
+				{
+					UserTakesTest* b = new UserTakesTest; //Попытался понять ООП :)
+					//заносим результат в карточку абонента
+					a.LoadUserInfo(a.GetLogin());
+					a.id_card.push_back(make_pair("test name:", b->GetTestName()));
+					a.id_card.push_back(make_pair("questions all:", b->GetQuestionsAll()));
+					a.id_card.push_back(make_pair("correct answers:", b->GetCorrectAnswers()));
+					a.id_card.push_back(make_pair("percentage:", b->GetPercentage()));
+					a.id_card.push_back(make_pair("mark:", b->GetMark()));
+					a.SaveUserInfo(a.GetLogin());
+					a.LoadUserInfo(a.GetLogin());
+					a.ShowUserInfo(a.GetLogin());
+					_getch();
+					delete b;
 					break;
-				case 1:
-
+				}
+				case 1: //Show my statistics
+					a.LoadUserInfo(a.GetLogin());
+					a.ShowUserInfo(a.GetLogin());
+					_getch();
 					break;
 				case 33:
 					break;
@@ -203,8 +279,6 @@ public:
 					Sleep(1000);
 					break;
 				}
-
-
 				break;
 			default:
 				cout << "ERROR ОCCURE: menu can't recognize user_type\n";
