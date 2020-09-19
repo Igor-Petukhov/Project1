@@ -49,7 +49,7 @@ public:
 				cout << "2 - Create new user\n";
 				cout << "3 - Delete user\n";
 				cout << "4 - Make changes in user\n";
-				cout << "5 - See stats\n";//todo
+				cout << "5 - See stats\n";
 				cout << "6 - Add CATEGORY for tests\n";
 				cout << "7 - Add test\n";
 				cout << "8 - Add questions with answers in test\n";
@@ -68,7 +68,7 @@ public:
 						cout << "\nSUCCESS\n";
 					else
 						cout << "\nTry another login\n";
-					Sleep(2000);
+					cout << "Press any key to continue\n";_getch();
 					break;
 				case 1: //Change my password
 					cout << "Please, enter new password: ";
@@ -77,7 +77,7 @@ public:
 						cout << "\nSUCCESS\n";
 					else
 						cout << "\nTry another password\n";
-					Sleep(2000);
+					cout << "Press any key to continue\n"; _getch();
 					break;
 				case 2: //Create new user
 					cout << "Login: ";
@@ -87,13 +87,13 @@ public:
 						if (a.Add_user(tmp_login))
 						{
 							cout << "\nSUCCESS\n";
-							Sleep(2000);
+							cout << "Press any key to continue\n"; _getch();
 						}
 					}
 					else
 					{
 						cout << "\nTry another login\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					break;
 				case 3: //Delete user
@@ -118,7 +118,7 @@ public:
 									else
 										puts("File successfully deleted");
 									cout << "\nSUCCESS\n";
-									Sleep(2000);
+									cout << "Press any key to continue\n"; _getch();
 								}
 						}
 						else
@@ -127,10 +127,16 @@ public:
 					else
 					{
 						cout << "\nTry another login\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					break;
 				case 4: //Make changes in user
+					cout << "There are such users:\n";
+					a.LoadUsersMap();
+					for (auto iter = a.user_map.begin(); iter != a.user_map.end(); iter++)
+					{
+						cout << iter->first << endl;
+					}
 					cout << "Login: ";
 					cin >> tmp_login;
 					if (a.user_map[tmp_login] && (a.GetAdmLogin() != tmp_login))
@@ -140,16 +146,34 @@ public:
 						a.SetUserInfo(tmp_login);
 						if (a.SaveUserInfo(tmp_login))
 							cout << "\nSUCCESS\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					else
 					{
 						cout << "\nTry another login\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					break;
 				case 5: //See stats
-
+					cout << "There are such users:\n";
+					a.LoadUsersMap();
+					for (auto iter = a.user_map.begin(); iter != a.user_map.end(); iter++)
+					{
+						cout << iter->first << endl;
+					}
+					cout << "Login: ";
+					cin >> tmp_login;
+					if (a.user_map[tmp_login] && (a.GetAdmLogin() != tmp_login))
+					{
+						a.LoadUserInfo(tmp_login);
+						a.ShowUserInfo(tmp_login);
+						cout << "Press any key to continue\n"; _getch();
+					}
+					else
+					{
+						cout << "\nTry another login\n";
+						cout << "Press any key to continue\n"; _getch();
+					}
 					break;
 				case 6: //Add CATEGORY for tests
 				{
@@ -160,7 +184,7 @@ public:
 						cout << "\nSUCCESS\n";
 					else
 						cout << "\nTry another category name\n";
-					Sleep(2000);
+					cout << "Press any key to continue\n"; _getch();
 					break;
 				}
 				case 7: //Add test
@@ -173,7 +197,7 @@ public:
 					if ((choise >= categor->GetLenghtCategoriesVector()) || (choise < 0))
 					{
 						cout << "\nTry another choise\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					else
 					{
@@ -184,7 +208,7 @@ public:
 							cout << "\nSUCCESS\n";
 						else
 							cout << "\nTry another test name\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					break;
 				}
@@ -198,7 +222,7 @@ public:
 					if ((choise >= categor->GetLenghtCategoriesVector()) || (choise < 0))
 					{
 						cout << "\nTry another choise\n";
-						Sleep(2000);
+						cout << "Press any key to continue\n"; _getch();
 					}
 					else
 					{
@@ -210,7 +234,7 @@ public:
 						if ((tmp >= categor->GetLenghtTestsVector(choise)) || (tmp < 0))
 						{
 							cout << "\nTry another choise\n";
-							Sleep(2000);
+							cout << "Press any key to continue\n"; _getch();
 						}
 						else
 						{
@@ -231,7 +255,7 @@ public:
 					break;
 				default:
 					cout << "No such menu choise. Try again.\n";
-					Sleep(1000);
+					cout << "Press any key to continue\n"; _getch();
 					break;
 				}
 				break;
@@ -243,7 +267,8 @@ public:
 					свои предыдущие результаты тестирования, сдать
 					новое тестирование.*/
 				cout << "0 - Take a new test\n";
-				cout << "1 - Show my statistics\n";
+				cout << "1 - Show my statistics\n"; 
+				cout << "2 - LOAD previous session\n";
 				cout << "33 - EXIT\n";
 
 				cin.clear();
@@ -252,7 +277,7 @@ public:
 				{
 				case 0: //Take a new test
 				{
-					UserTakesTest* b = new UserTakesTest; //Попытался понять ООП :)
+					UserTakesTest* b = new UserTakesTest(a); //Попытался понять ООП :)
 					//заносим результат в карточку абонента
 					a.LoadUserInfo(a.GetLogin());
 					a.id_card.push_back(make_pair("test name:", b->GetTestName()));
@@ -263,20 +288,67 @@ public:
 					a.SaveUserInfo(a.GetLogin());
 					a.LoadUserInfo(a.GetLogin());
 					a.ShowUserInfo(a.GetLogin());
-					_getch();
+					cout << "Press any key to continue\n"; _getch();
 					delete b;
 					break;
 				}
 				case 1: //Show my statistics
 					a.LoadUserInfo(a.GetLogin());
 					a.ShowUserInfo(a.GetLogin());
-					_getch();
+					cout << "Press any key to continue\n"; _getch();
 					break;
+				case 2: //LOAD previous session
+				{
+					string tmp_str;
+					int category_index, test_index;
+					int questions_all, correct_answers, mark_A = 12;
+					float mark, percentage;
+					string tmp_str_1, tmp_str_2, tmp_str_3;
+					string test_name;
+
+					ifstream in16("User\\" + a.GetLogin() + "-SAVE" + ".bin");
+					if (in16.is_open())
+					{
+						getline(in16, tmp_str);
+						category_index = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						test_index = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						questions_all = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						correct_answers = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						mark_A = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						mark = stoi(tmp_str);
+
+						getline(in16, tmp_str);
+						percentage = stof(tmp_str);
+
+						getline(in16, tmp_str_1);
+
+						getline(in16, tmp_str_2);
+
+						getline(in16, test_name);
+					}
+					in16.close();
+
+					UserTakesTest* c = new UserTakesTest(a, category_index, test_index,
+						questions_all, correct_answers, mark_A,
+						mark, percentage, tmp_str_1, tmp_str_2, tmp_str_3,
+						test_name);
+					break;
+				}
 				case 33:
 					break;
 				default:
 					cout << "No such menu choise. Try again.\n";
-					Sleep(1000);
+					cout << "Press any key to continue\n"; _getch();
 					break;
 				}
 				break;
@@ -287,6 +359,8 @@ public:
 		} while (choise != 33);
 		cout << "Bye-bye!\n";
 	}
+
+
 };
 
 Singleton_Menu* Singleton_Menu::obj = nullptr;

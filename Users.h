@@ -3,13 +3,16 @@
 class Base_User
 {
 private:
-	string login, password;
+	string login;
+	string password;
 	string admin_login; //первый логин и есть логин админа
 	int user_type = 0; //1-admin, 2-user
 	long long password_hash, new_password_hash;
 	char x = '0';
 
 public:
+	//friend class UserTakesTest;
+
 	vector <pair<string, string>> id_card; //тут данные конкретного пользователя
 	map<string, long long> user_map; //сюда считываются логины и хеши паролей из файла
 	

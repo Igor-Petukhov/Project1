@@ -11,39 +11,9 @@ telephone number:
 test name:
 slozenije
 questions all:
-5
+9
 correct answers:
-5
-percentage:
-100.000000
-mark:
-12.000000
-test name:
-umnozenije
-questions all:
-3
-correct answers:
-3
-percentage:
-100.000000
-mark:
-12.000000
-test name:
-c++
-questions all:
-3
-correct answers:
-3
-percentage:
-100.000000
-mark:
-12.000000
-test name:
-protokols
-questions all:
-4
-correct answers:
-4
+9
 percentage:
 100.000000
 mark:
@@ -51,10 +21,40 @@ mark:
 test name:
 slozenije
 questions all:
-9
+3
 correct answers:
-1
+2
 percentage:
-11.111111
+66.666664
 mark:
-1.333333
+8.000000
+test name:
+slozenije
+questions all:
+4
+correct answers:
+3
+percentage:
+75.000000
+mark:
+9.000000
+test name:
+slozenije
+questions all:
+5
+correct answers:
+4
+percentage:
+80.000000
+mark:
+9.600000
+test name:
+
+questions all:
+-842150451
+correct answers:
+-842150451
+percentage:
+-431602080.000000
+mark:
+-431602080.000000
