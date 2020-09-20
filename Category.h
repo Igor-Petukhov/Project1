@@ -56,7 +56,7 @@ public:
 				if (_mkdir("Categories") == -1)
 				{
 					cout << "Error!\nCouldn't create new directory. Check directory \"Categories\".\n";
-					Sleep(5000);
+					cout << "Press any key to continue\n"; _getch();
 					return 0;
 				}
 			}

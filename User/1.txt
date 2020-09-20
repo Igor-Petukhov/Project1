@@ -8,53 +8,63 @@ address:
 1
 telephone number:
 1
+test time:
+20-09-2020 03:22:32 <----------------
 test name:
-slozenije
-questions all:
-9
-correct answers:
-9
-percentage:
-100.000000
-mark:
-12.000000
-test name:
-slozenije
-questions all:
-3
-correct answers:
-2
-percentage:
-66.666664
-mark:
-8.000000
-test name:
-slozenije
-questions all:
-4
-correct answers:
-3
-percentage:
-75.000000
-mark:
-9.000000
-test name:
-slozenije
+live or dead
 questions all:
 5
 correct answers:
+2
+percentage:
+40
+mark:
 4
-percentage:
-80.000000
-mark:
-9.600000
+test time:
+20-09-2020 03:24:34 <----------------
 test name:
-
+umnozenije
 questions all:
--842150451
+9
 correct answers:
--842150451
+9
 percentage:
--431602080.000000
+99
 mark:
--431602080.000000
+12
+test time:
+20-09-2020 03:30:06 <----------------
+test name:
+protokols
+questions all:
+6
+correct answers:
+5
+percentage:
+80
+mark:
+10
+test time:
+20-09-2020 03:32:03 <----------------
+test name:
+slozenije
+questions all:
+9
+correct answers:
+8
+percentage:
+88
+mark:
+10
+test time:
+20-09-2020 03:33:00 <----------------
+test name:
+slozenije
+questions all:
+9
+correct answers:
+9
+percentage:
+99
+mark:
+12

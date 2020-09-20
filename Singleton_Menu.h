@@ -18,6 +18,7 @@ public:
 	string tmp_login;
 	string new_admin_password;
 
+
 	void Show_Menu(Base_User a)
 	{
 		int choise = 88;
@@ -27,9 +28,10 @@ public:
 			switch (a.GetUserType())
 			{
 			case 1: //(admin mode)
-				cout << "ADMINISTRATOR MODE ACTIVATED\n";
+				cout << "-----------ADMINISTRATOR MODE ACTIVATED----------\n";
+				cout << "-------------------------------------------------\n";
 				cout << "Welcome \"" << a.GetLogin() << "\"!\n";
-				cout << "------Menu------" << endl;
+				cout << "----------------------MENU-----------------------" << endl;
 				/*¦ В дальнейшем пароль и логин можно изменить (но
 				данную возможность имеет только админ).
 
@@ -63,7 +65,7 @@ public:
 				{
 				case 0: //Change my login
 					cout << "Please, enter new login: ";
-					cin >> tmp_login;
+					getline(cin, tmp_login);
 					if (a.ChangeAdminLogin(tmp_login))
 						cout << "\nSUCCESS\n";
 					else
@@ -72,7 +74,7 @@ public:
 					break;
 				case 1: //Change my password
 					cout << "Please, enter new password: ";
-					cin >> new_admin_password;
+					getline(cin, new_admin_password);
 					if (a.ChangeAdminPswd(new_admin_password))
 						cout << "\nSUCCESS\n";
 					else
@@ -81,7 +83,7 @@ public:
 					break;
 				case 2: //Create new user
 					cout << "Login: ";
-					cin >> tmp_login;
+					getline(cin, tmp_login);
 					if (!a.user_map[tmp_login])
 					{
 						if (a.Add_user(tmp_login))
@@ -104,7 +106,7 @@ public:
 						cout << iter->first << endl;
 					}
 					cout << "Login: ";
-					cin >> tmp_login;
+					getline(cin, tmp_login);
 					if (a.user_map[tmp_login] && (a.GetAdmLogin() != tmp_login))
 					{
 						if (a.user_map.erase(tmp_login))
@@ -138,7 +140,7 @@ public:
 						cout << iter->first << endl;
 					}
 					cout << "Login: ";
-					cin >> tmp_login;
+					getline(cin, tmp_login);
 					if (a.user_map[tmp_login] && (a.GetAdmLogin() != tmp_login))
 					{
 						a.LoadUserInfo(tmp_login);
@@ -162,10 +164,12 @@ public:
 						cout << iter->first << endl;
 					}
 					cout << "Login: ";
-					cin >> tmp_login;
+					getline(cin, tmp_login);
 					if (a.user_map[tmp_login] && (a.GetAdmLogin() != tmp_login))
 					{
 						a.LoadUserInfo(tmp_login);
+						system("cls");
+						cout << "--------------USER \"" << tmp_login <<"\" STAT--------------\n";
 						a.ShowUserInfo(tmp_login);
 						cout << "Press any key to continue\n"; _getch();
 					}
@@ -178,7 +182,7 @@ public:
 				case 6: //Add CATEGORY for tests
 				{
 					cout << "New category name: ";
-					cin >> tmp_str;
+					getline(cin, tmp_str);
 					Category* categor = new Test();
 					if (categor->AddCategory(tmp_str))
 						cout << "\nSUCCESS\n";
@@ -203,7 +207,7 @@ public:
 					{
 						cout << "New test name: "; //просим имя нового теста и добавляем его
 						cin.clear();
-						cin >> tmp_str;
+						getline(cin, tmp_str);
 						if (categor->AddTest(tmp_str, choise))
 							cout << "\nSUCCESS\n";
 						else
@@ -260,10 +264,11 @@ public:
 				}
 				break;
 			case 2: //(user mode)
-				cout << "USER MODE ACTIVATED\n";
+				cout << "----------------USER MODE ACTIVATED--------------\n";
+				cout << "-------------------------------------------------\n";
 				cout << "Welcome \"" << a.GetLogin() << "\"!\n";
-				cout << "------Menu------" << endl;
-				/*¦ После входа гость имеет возможность просмотреть
+				cout << "----------------------MENU-----------------------" << endl;
+					/*¦ После входа гость имеет возможность просмотреть
 					свои предыдущие результаты тестирования, сдать
 					новое тестирование.*/
 				cout << "0 - Take a new test\n";
@@ -277,23 +282,23 @@ public:
 				{
 				case 0: //Take a new test
 				{
+					Sleep(300);
+					ifstream in_tmp_test_2("User\\" + a.GetLogin() + "-SAVE" + ".bin");
+					if (in_tmp_test_2.is_open())
+					{
+						cout << "\nYou can not take tests, while you have saved one!\n";
+						cout << "Press any key to continue\n"; _getch();
+						break;
+					}
 					UserTakesTest* b = new UserTakesTest(a); //Попытался понять ООП :)
-					//заносим результат в карточку абонента
-					a.LoadUserInfo(a.GetLogin());
-					a.id_card.push_back(make_pair("test name:", b->GetTestName()));
-					a.id_card.push_back(make_pair("questions all:", b->GetQuestionsAll()));
-					a.id_card.push_back(make_pair("correct answers:", b->GetCorrectAnswers()));
-					a.id_card.push_back(make_pair("percentage:", b->GetPercentage()));
-					a.id_card.push_back(make_pair("mark:", b->GetMark()));
-					a.SaveUserInfo(a.GetLogin());
-					a.LoadUserInfo(a.GetLogin());
-					a.ShowUserInfo(a.GetLogin());
 					cout << "Press any key to continue\n"; _getch();
 					delete b;
 					break;
 				}
 				case 1: //Show my statistics
 					a.LoadUserInfo(a.GetLogin());
+					system("cls");
+					cout << "---------------------MY STAT---------------------\n";
 					a.ShowUserInfo(a.GetLogin());
 					cout << "Press any key to continue\n"; _getch();
 					break;
@@ -302,8 +307,8 @@ public:
 					string tmp_str;
 					int category_index, test_index;
 					int questions_all, correct_answers, mark_A = 12;
-					float mark, percentage;
-					string tmp_str_1, tmp_str_2, tmp_str_3;
+					int mark, percentage;
+					string tmp_str_1, tmp_str_2;
 					string test_name;
 
 					ifstream in16("User\\" + a.GetLogin() + "-SAVE" + ".bin");
@@ -328,20 +333,27 @@ public:
 						mark = stoi(tmp_str);
 
 						getline(in16, tmp_str);
-						percentage = stof(tmp_str);
+						percentage = stoi(tmp_str);
 
 						getline(in16, tmp_str_1);
 
 						getline(in16, tmp_str_2);
 
 						getline(in16, test_name);
-					}
-					in16.close();
 
-					UserTakesTest* c = new UserTakesTest(a, category_index, test_index,
-						questions_all, correct_answers, mark_A,
-						mark, percentage, tmp_str_1, tmp_str_2, tmp_str_3,
-						test_name);
+						in16.close();
+
+						UserTakesTest* c = new UserTakesTest(a, category_index, test_index,
+							--questions_all, correct_answers, mark_A,
+							mark, percentage, tmp_str_1, tmp_str_2,
+							test_name);
+						cout << "Press any key to continue\n"; _getch();
+					}
+					else
+					{
+						cout << "You don't have saved work\n";
+						cout << "Press any key to continue\n"; _getch();
+					}
 					break;
 				}
 				case 33:

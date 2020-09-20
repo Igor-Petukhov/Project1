@@ -98,6 +98,9 @@ public:
 
 	void Start()
 	{
+		cout << "------------WELCOME TO THE TEST SYSTEM-----------\n";
+		cout << "-------------------------------------------------\n";
+		cout << "Please register or log in. Just enter your login.\n\n";
 		LoadUsersMap();
 		cout << "Login: ";
 		cin >> login;
@@ -109,11 +112,10 @@ public:
 		}
 		else
 		{
-			cout << "Welcome " << login << endl;
 			if (IsPasswordCorrect())
 			{
-				cout << "\nCongrat! Access enable!" << endl; //Этот login можно запускать 
-				Sleep(500);
+				cout << "\n\nCongrat! Access enable!" << endl; //Этот login можно запускать 
+				cout << "Press any key to continue\n"; _getch();
 				if (login == admin_login)
 				{
 					//admin mode - в системе админ
@@ -191,7 +193,7 @@ public:
 		if (_mkdir("User") == -1)
 		{
 			cout << "Error!\nCouldn't create new directory. Check directory \"User\".\n";
-			Sleep(5000);
+			cout << "Press any key to exit\n"; _getch();
 			exit(0);
 		}
 		cout << "Creating Administrator\n";
@@ -299,10 +301,12 @@ public:
 
 	void ShowUserInfo(string login)
 	{
+		cout << "-------------------------------------------------\n";
 		for (auto i = id_card.begin(); i != id_card.end(); i++)
 		{
 			cout << i->first << " " << i->second << endl;
 		}
+		cout << "-------------------------------------------------\n";
 	}
 
 	void SetUserInfo(string login)

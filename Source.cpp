@@ -7,6 +7,8 @@
 #include <windows.h>
 #include <direct.h>
 #include <vector>
+#include <stdio.h>
+
 
 using namespace std;
 
