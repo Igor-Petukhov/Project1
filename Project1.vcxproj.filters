@@ -18,9 +18,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Users.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Users.h">
@@ -41,9 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="User\Users.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="User\1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

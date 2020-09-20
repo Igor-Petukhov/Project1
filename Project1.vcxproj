@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Category.h" />
@@ -150,7 +149,6 @@
     <ClInclude Include="UserTakesTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="User\1.txt" />
     <Text Include="User\Users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

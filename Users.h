@@ -3,7 +3,7 @@
 class Base_User
 {
 private:
-	string login;
+	string login = "";
 	string password;
 	string admin_login; //первый логин и есть логин админа
 	int user_type = 0; //1-admin, 2-user
@@ -98,6 +98,7 @@ public:
 
 	void Start()
 	{
+		system("cls");
 		cout << "------------WELCOME TO THE TEST SYSTEM-----------\n";
 		cout << "-------------------------------------------------\n";
 		cout << "Please register or log in. Just enter your login.\n\n";
@@ -108,6 +109,7 @@ public:
 		{
 			Add_user(login);
 			cout << "Please log in again!" << endl;
+			cout << "Press any key to continue\n"; _getch();
 			Start();
 		}
 		else
@@ -130,6 +132,7 @@ public:
 			else
 			{
 				cout << "\nSorry! Access denied! Wrong password!" << endl;
+				cout << "Press any key to continue\n"; _getch();
 				Start();
 			}
 		}
@@ -256,10 +259,10 @@ public:
 		}
 	}
 
-	bool ChangeAdminPswd(string new_adm_pswd)
+	bool ChangeAdminPswd()
 	{
+		EnterPassword();
 		hash<string> t;
-		new_password_hash = t(new_adm_pswd);
 		try
 		{
 			LoadUsersMap();
@@ -267,7 +270,7 @@ public:
 			ofstream out3("User\\Users.txt");
 			if (out3.is_open())
 			{
-				out3 << admin_login << char(9) << new_password_hash << endl;
+				out3 << admin_login << char(9) << password_hash << endl;
 				for (auto it = user_map.begin(); it != user_map.end(); it++)
 				{
 					out3 << it->first << char(9) << it->second << endl;

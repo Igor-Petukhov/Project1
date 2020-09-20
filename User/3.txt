@@ -1,10 +1,58 @@
 surname:
-3
+Valerjev
 name:
-3
+Valerij
 fathersname:
-3
+Valerievitch
 address:
-3
+Odessa, Deribasivska 15/A, 4
 telephone number:
-3
++3(094)-123-45-67
+test finish time:
+20-09-2020 20:50:17 <----------
+test name:
+slozhenije
+questions all:
+8
+correct answers:
+0
+percentage:
+0
+mark:
+0
+test finish time:
+21-09-2020 00:11:24 <----------
+test name:
+c++
+questions all:
+5
+correct answers:
+5
+percentage:
+100
+mark:
+12
+test finish time:
+21-09-2020 00:12:06 <----------
+test name:
+protokols
+questions all:
+14
+correct answers:
+10
+percentage:
+71
+mark:
+9
+test finish time:
+21-09-2020 00:12:25 <----------
+test name:
+c++
+questions all:
+5
+correct answers:
+4
+percentage:
+80
+mark:
+10

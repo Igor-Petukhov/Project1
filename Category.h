@@ -25,7 +25,7 @@ public:
 	virtual int GetLenghtCategoriesVector() = 0;
 	virtual bool AddTest(string test_name, int category_number) = 0;
 	virtual string AddQuestion() = 0;
-	virtual string AddAnswer() = 0;
+	virtual string AddAnswer(string new_question) = 0;
 	virtual void LoadConcreteCategoryVector(int category_number) = 0;
 	virtual void ShowTests(int category_number) = 0;
 	virtual int GetLenghtTestsVector(int category_number) = 0;
@@ -131,7 +131,7 @@ public:
 			}
 
 			//создаём пустой файл для теста
-			ofstream out2("Tests\\" + test_name + ".txt");
+			ofstream out2("Tests\\" + test_name + ".my_ext");
 			out2.close();
 
 			//в файл конкретной категории дописываем название нового теста
@@ -162,11 +162,12 @@ public:
 		return new_question;
 	}
 
-	string AddAnswer() override
+	string AddAnswer(string new_question) override
 	{
 		cin.clear();
 		string new_answer;
 		system("cls");
+		cout << "Question: " << new_question << endl;
 		cout << "Please, enter answer:\n";
 		getline(cin, new_answer);
 		return new_answer;
@@ -212,11 +213,12 @@ public:
 		do
 		{
 			//в файл конкретного теста дописываем поочереди построчно пары вопрос-ответ
-			ofstream out10("Tests\\" + tests[test_index] + ".txt", ios::app);
+			ofstream out10("Tests\\" + tests[test_index] + ".my_ext", ios::app);
 			if (out10.is_open())
 			{
-				out10 << AddQuestion() << endl;
-				out10 << AddAnswer() << endl;
+				string tmp = AddQuestion();
+				out10 << tmp << endl;
+				out10 << AddAnswer(tmp) << endl;
 			}
 			out10.close();
 			cout << "Question with answer were SUCCESSfully added!\n";

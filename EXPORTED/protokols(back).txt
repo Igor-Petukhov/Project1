@@ -1,0 +1,10 @@
+int main(){} is a function? (y/n)
+y
+bool - is a logical variable type? (y/n)
+y
+i++ is a postfix increment? (y/n)
+y
+--i is a prefix decrement? (y/n)
+y
+while() - is a cicle? (y/n)
+y

@@ -1,0 +1,28 @@
+Port of HTTP is 80? (y/n)
+y
+Port of FTP (data) is 20? (y/n)
+y
+Port of FTP (upravlenije) is 21? (y/n)
+y
+Port of SSH is 22? (y/n)
+y
+Port of telnet is 23? (y/n)
+y
+Port of SMTP is 25? (y/n)
+y
+Port of DNS is 53? (y/n)
+y
+Port of DHCP (server) is 67? (y/n)
+y
+Port of DHCP (client) is 68? (y/n)
+y
+Port of TFTP is 69? (y/n)
+y
+Port of POP3 is 110? (y/n)
+y
+Port of IMAP is 143? (y/n)
+y
+Port of SNMP is 161? (y/n)
+y
+Port of RDP is 3389? (y/n)
+y

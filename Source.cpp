@@ -10,6 +10,9 @@
 #include <stdio.h>
 
 
+#include <io.h>
+#include <iomanip> 
+
 using namespace std;
 
 #include "Users.h"
@@ -19,10 +22,13 @@ using namespace std;
 
 int main()
 {
-	Base_User a;
-	a.Start();
-	Singleton_Menu* singleton_menu = Singleton_Menu::getInstance();
-	singleton_menu->Show_Menu(a);
-
+	while (1)
+	{
+		Base_User a;
+		a.Start();
+		Singleton_Menu* singleton_menu = Singleton_Menu::getInstance();
+		singleton_menu->Show_Menu(a);
+		cout << "Press any key to continue\n"; _getch();
+	}
 }
 

@@ -1,0 +1,10 @@
+surname:
+6
+name:
+6
+fathersname:
+
+address:
+6
+telephone number:
+6

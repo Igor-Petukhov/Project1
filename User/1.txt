@@ -1,70 +1,70 @@
 surname:
-1
+Petukhov
 name:
-1
+Igor
 fathersname:
-1
+Vasiliyovich
 address:
-1
+Mykolaiv, Mala Morska st., 23
 telephone number:
-1
-test time:
-20-09-2020 03:22:32 <----------------
+093-41-88-301
+test finish time:
+20-09-2020 20:44:39 <----------
 test name:
-live or dead
+c++
 questions all:
 5
 correct answers:
-2
-percentage:
-40
-mark:
 4
-test time:
-20-09-2020 03:24:34 <----------------
-test name:
-umnozenije
-questions all:
-9
-correct answers:
-9
-percentage:
-99
-mark:
-12
-test time:
-20-09-2020 03:30:06 <----------------
-test name:
-protokols
-questions all:
-6
-correct answers:
-5
 percentage:
 80
 mark:
 10
-test time:
-20-09-2020 03:32:03 <----------------
+test finish time:
+20-09-2020 20:45:21 <----------
 test name:
-slozenije
+protokols
 questions all:
-9
+14
+correct answers:
+14
+percentage:
+100
+mark:
+12
+test finish time:
+20-09-2020 20:46:48 <----------
+test name:
+slozhenije
+questions all:
+8
+correct answers:
+3
+percentage:
+38
+mark:
+5
+test finish time:
+20-09-2020 20:47:12 <----------
+test name:
+umnozhenije
+questions all:
+7
+correct answers:
+7
+percentage:
+100
+mark:
+12
+test finish time:
+20-09-2020 20:51:55 <----------
+test name:
+slozhenije
+questions all:
+8
 correct answers:
 8
 percentage:
-88
-mark:
-10
-test time:
-20-09-2020 03:33:00 <----------------
-test name:
-slozenije
-questions all:
-9
-correct answers:
-9
-percentage:
-99
+100
 mark:
 12

@@ -41,13 +41,6 @@ public:
 		Category* categor = new Test();
 		category_index = in_category_index;
 
-		//если юзер загрузил прошлый сеанс, то файл надо удалить. Так как наличие файла - признак того, что юзер сохранялся
-		if (category_index != -1) //признак загрузки прошлого сеанса (переданы считаные состояния переменных)
-		{
-			string tmp5 = "User\\" + base_user_in.GetLogin() + "-SAVE" + ".bin";
-			remove(tmp5.c_str());
-		}
-		
 		test_index = in_test_index;
 		questions_all = in_questions_all;
 		correct_answers = in_correct_answers;
@@ -69,6 +62,7 @@ public:
 
 			cin >> category_index; //индекс категории
 		}
+
 		if ((category_index >= categor->GetLenghtCategoriesVector()) || (category_index < 0))
 		{
 			cout << "\nTry another choise\n";
@@ -97,112 +91,124 @@ public:
 				else
 				{
 					test_name = in_test_name;
+
+					//если ЗАГРУЗКА
+					//то файл надо удалить. Так как наличие файла - признак того, что юзер сохранялся
+					//признак загрузки прошлого сеанса (переданы считаные состояния переменных)
+					string tmp5 = "User\\" + base_user_in.GetLogin() + "-SAVE-" + test_name + ".bin";
+					remove(tmp5.c_str());
 				}
-				system("cls");
-				cout << "--------------------START TEST-------------------" << endl;
-				cout << "Test name: " << categor->GetTestName(test_index) << endl;
-				cout << "if you need to SAVE print \"SAVE\"" << endl;
-				cout << "-------------------------------------------------\n";
-				Sleep(300);
-				ifstream in12("Tests\\" + test_name + ".txt");
-				cin.ignore();
-				if (in12.is_open())
+
+				//нельзя запустить тест, по которому есть сохранение!
+				ifstream in_tmp_test_3("User\\" + base_user_in.GetLogin() + "-SAVE-" + categor->GetTestName(test_index) + ".bin");
+				if (in_tmp_test_3.is_open())
 				{
-					bool marker = 0; //если маркер станет 1 - то значит юзер выбрал сохраниться
-					int tmp = 0;
-					while (getline(in12, tmp_str_1) && getline(in12, tmp_str_2))
+					in_tmp_test_3.close();
+					cout << "\nYou can not start this test, while you have saved one! Please LOAD this test.\n";
+				}
+				else
+				{
+					system("cls");
+					cout << "--------------------START TEST-------------------" << endl;
+					cout << "Test name: " << categor->GetTestName(test_index) << endl;
+					cout << "if you need to SAVE print \"SAVE\"" << endl;
+					cout << "-------------------------------------------------\n";
+					Sleep(300);
+					ifstream in12("Tests\\" + test_name + ".my_ext");
+					cin.ignore();
+					if (in12.is_open())
 					{
-						tmp++;
-						if (tmp <= (questions_all))
-							continue;
-						cout << "\n-------------------QUESTION #" << ++questions_all << "-------------------" << endl;
-						cout << "Question: " << tmp_str_1 << endl << endl;
-						cout << "Your answer: ";
-						tmp_str_3 = "";
-						getline(cin, tmp_str_3); //считали ответ user-a в стр3
-
-
-						///////////////////////////////////////////////////////////////
-						//если юзер захотел сохраниться
-						if (tmp_str_3 == "SAVE")
+						bool marker = 0; //если маркер станет 1 - то значит юзер выбрал сохраниться
+						int tmp = 0;
+						while (getline(in12, tmp_str_1) && getline(in12, tmp_str_2))
 						{
-							marker = 1; //признак того, что было выбрано сохраниться
-							
-							ofstream out15("User\\" + base_user_in.GetLogin() + "-SAVE" + ".bin");
-							if (out15.is_open())
-							{
-								out15 << category_index << endl;
-								out15 << test_index << endl;
-								out15 << questions_all << endl;
-								out15 << correct_answers << endl;
-								out15 << mark_A << endl;
-								out15 << mark << endl;
-								out15 << percentage << endl;
-								out15 << tmp_str_1 << endl;
-								out15 << tmp_str_2 << endl;
-								out15 << test_name << endl;
-								cout << "\nSAVE DONE" << endl;
-								break;
-							}
-							out15.close();
-						}
-						///////////////////////////////////////////////////////////////
+							tmp++;
+							if (tmp <= (questions_all))
+								continue;
+							cout << "\n-------------------QUESTION #" << ++questions_all << "-------------------" << endl;
+							cout << "Question: " << tmp_str_1 << endl << endl;
+							cout << "Your answer: ";
+							tmp_str_3 = "";
+							getline(cin, tmp_str_3); //считали ответ user-a в стр3
 
+							///////////////////////////////////////////////////////////////
+							//если юзер захотел сохраниться
+							if (tmp_str_3 == "SAVE")
+							{
+								marker = 1; //признак того, что было выбрано сохраниться
+								ofstream out15("User\\" + base_user_in.GetLogin() + "-SAVE-" + test_name + ".bin");
+								if (out15.is_open())
+								{
+									out15 << category_index << endl;
+									out15 << test_index << endl;
+									out15 << questions_all << endl;
+									out15 << correct_answers << endl;
+									out15 << mark_A << endl;
+									out15 << mark << endl;
+									out15 << percentage << endl;
+									out15 << tmp_str_1 << endl;
+									out15 << tmp_str_2 << endl;
+									out15 << test_name << endl;
+									cout << "\nSAVE DONE" << endl;
+									break;
+								}
+								out15.close();
+							}
+							///////////////////////////////////////////////////////////////
+							if (!marker)
+							{
+								//правильный ответ уже в стр2
+								if (!strcmp(tmp_str_2.c_str(), tmp_str_3.c_str()))
+								{
+									cout << "                             correct\n";
+									correct_answers++;
+								}
+								else
+								{
+									cout << "                              wrong\n";
+									cout << "correct answer is: " << tmp_str_2 << endl;
+								}
+							}
+						}
 						if (!marker)
 						{
-							//правильный ответ уже в стр2
-							if (!strcmp(tmp_str_2.c_str(), tmp_str_3.c_str()))
-							{
-								cout << "                             correct\n";
-								correct_answers++;
-							}
-							else
-							{
-								cout << "                              wrong\n";
-								cout << "correct answer is: " << tmp_str_2 << endl;
-							}
+							cout << "=================================================" << endl;
+							mark = (int)round(((float)mark_A / questions_all) * correct_answers);
+							percentage = (int)round((100.0 / questions_all) * correct_answers);
+							cout << "Your results:\ncorrect_answers: " << correct_answers << "/" << questions_all << "\tpercents: " << percentage << "%\t mark: " << mark << endl;
+							if (mark == 12)
+								cout << "CONGRATULATIONS!!!" << endl;
+							cout << "Press any key to continue\n"; _getch();
+
+							//saving results
+								//заносим результат в карточку абонента
+							base_user_in.LoadUserInfo(base_user_in.GetLogin());
+							/////////////////////////////
+							///загнать текущее время в строку
+							time_t rawtime;
+							time(&rawtime);
+							char buffer[80];
+							strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S <----------", localtime(&rawtime));
+							string tmp_time(buffer);
+							/////////////////////////////
+							base_user_in.id_card.push_back(make_pair("test finish time:", tmp_time));
+							base_user_in.id_card.push_back(make_pair("test name:", GetTestName()));
+							base_user_in.id_card.push_back(make_pair("questions all:", GetQuestionsAll()));
+							base_user_in.id_card.push_back(make_pair("correct answers:", GetCorrectAnswers()));
+							base_user_in.id_card.push_back(make_pair("percentage:", GetPercentage()));
+							base_user_in.id_card.push_back(make_pair("mark:", GetMark()));
+							base_user_in.SaveUserInfo(base_user_in.GetLogin());
+							base_user_in.LoadUserInfo(base_user_in.GetLogin());
+							system("cls");
+							cout << "---------------------MY STAT---------------------\n";
+							base_user_in.ShowUserInfo(base_user_in.GetLogin());
 						}
+						marker = 0;
 					}
-					if (!marker)
-					{
-						cout << "=================================================" << endl;
-						mark = ((float)mark_A / questions_all) * correct_answers;
-						percentage = (100 / questions_all) * correct_answers;
-						cout << "Your results:\ncorrect_answers: " << correct_answers << "\tpercents: " << percentage << "%\t mark: " << mark << endl;
-						if (mark == 12)
-							cout << "CONGRATULATIONS!!!" << endl;
-						cout << "Press any key to continue\n"; _getch();
-
-
-						//saving results
-
-						//заносим результат в карточку абонента
-						base_user_in.LoadUserInfo(base_user_in.GetLogin());
-						/////////////////////////////
-						///загнать текущее время в строку
-						time_t rawtime;
-						time(&rawtime);
-						char buffer[80];
-						strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S <----------------", localtime(&rawtime));
-						string tmp_time(buffer);
-						/////////////////////////////
-
-						base_user_in.id_card.push_back(make_pair("test time:", tmp_time));
-						base_user_in.id_card.push_back(make_pair("test name:", GetTestName()));
-						base_user_in.id_card.push_back(make_pair("questions all:", GetQuestionsAll()));
-						base_user_in.id_card.push_back(make_pair("correct answers:", GetCorrectAnswers()));
-						base_user_in.id_card.push_back(make_pair("percentage:", GetPercentage()));
-						base_user_in.id_card.push_back(make_pair("mark:", GetMark()));
-						base_user_in.SaveUserInfo(base_user_in.GetLogin());
-						base_user_in.LoadUserInfo(base_user_in.GetLogin());
-						system("cls");
-						cout << "---------------------MY STAT---------------------\n";
-						base_user_in.ShowUserInfo(base_user_in.GetLogin());
-					}
-					marker = 0;
+					in12.close();
 				}
-				in12.close();
 			}
 		}
 	}
+
 };
